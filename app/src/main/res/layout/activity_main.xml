@@ -4,17 +4,17 @@
     >
     <data>
         <variable
-            name="hero"
-            type="android.powerword.siegfried.com.dnd_builder.model.Hero" />
-        <variable
-            name="manager"
-            type="android.support.v7.widget.GridLayoutManager" />
-        <variable
-            name="adapter"
-            type="android.powerword.siegfried.com.dnd_builder.adapter.AttrAdapter"/>
-        <variable
             name="listener"
             type="android.view.View.OnClickListener" />
+        <variable
+            name="vm"
+            type="android.powerword.siegfried.com.dnd_builder.viewmodel.HeroVM" />
+        <variable
+            name="heroAttrs"
+            type="android.powerword.siegfried.com.dnd_builder.model.HeroAttrs" />
+        <variable
+            name="hero"
+            type="android.powerword.siegfried.com.dnd_builder.model.Hero"/>
      </data>
     <android.support.constraint.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,7 +23,6 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         tools:context=".MainActivity">
-
 
         <RelativeLayout
             android:id="@+id/rl_hero_short"
@@ -54,42 +53,50 @@
                     android:elevation="10dp"
                     android:src="@drawable/ic_launcher_background" />
 
-                <LinearLayout
+                <android.powerword.siegfried.com.dnd_builder.custom.HeroLinearlayout
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:hero="@{hero}"
+                    />
 
-                    <TextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{hero.name}"
-                        android:textColor="@color/colorWhite" />
 
-                    <TextView
-                        android:id="@+id/tv_race"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="@{hero.race}"
-                        android:textColor="@color/colorWhite" />
+                <!--<LinearLayout-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content">-->
 
-                    <TextView
-                        android:id="@+id/tv_level"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="@{hero.level}"
-                        android:textColor="@color/colorWhite" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_name"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="@{hero.name}"-->
+                        <!--android:textColor="@color/colorWhite" />-->
 
-                    <TextView
-                        android:id="@+id/tv_class"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="@{hero.clazz}"
-                        android:textColor="@color/colorWhite" />
-                </LinearLayout>
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_race"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:text="@{hero.race}"-->
+                        <!--android:textColor="@color/colorWhite" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_level"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:text="@{hero.level}"-->
+                        <!--android:textColor="@color/colorWhite" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_class"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:text="@{hero.clazz}"-->
+                        <!--android:textColor="@color/colorWhite" />-->
+                <!--</LinearLayout>-->
 
             </LinearLayout>
         </RelativeLayout>
@@ -103,21 +110,35 @@
 
         <!--&gt;-->
 
-        <android.support.v7.widget.RecyclerView
+        <android.powerword.siegfried.com.dnd_builder.custom.AttRecycleView
             android:id="@+id/recyclerView"
             style="@android:style/Widget.Material.TextView"
             android:layout_width="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rl_hero_short"
-            app:layoutManager="@{manager}"
-            app:adapter="@{adapter}"
+            app:heroAttrs="@{heroAttrs}"
             app:layout_constraintVertical_weight="1"
             android:layout_height="wrap_content" />
         <!--</android.support.v7.widget.CardView>-->
 
 
-
+        <!--<android.powerword.siegfried.com.dnd_builder.custom.DrawableButton-->
+            <!--android:id="@+id/button"-->
+            <!--style="@android:style/Widget.Material.Button"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/colorPrimaryDark"-->
+            <!--android:text="随机"-->
+            <!--android:drawableTint="@color/colorWhite"-->
+            <!--android:drawableLeft="@drawable/baseline_apps_24"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--android:onClick="@{listener}"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/recyclerView"-->
+            <!--app:layout_constraintVertical_bias="1.0" />-->
 
         <android.powerword.siegfried.com.dnd_builder.custom.DrawableButton
             android:id="@+id/button"
@@ -129,7 +150,7 @@
             android:drawableTint="@color/colorWhite"
             android:drawableLeft="@drawable/baseline_apps_24"
             android:textColor="@color/colorWhite"
-            android:onClick="@{listener}"
+            android:onClick="@{v -> vm.onClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

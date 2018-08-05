@@ -1,11 +1,11 @@
 package android.powerword.siegfried.com.dnd_builder.model;
 
-public class   HeroAttr {
+public class HeroAttrItem {
 
     public Attrs attrs;
     public int value;
 
-    public HeroAttr(Attrs attrs, int value) {
+    public HeroAttrItem(Attrs attrs, int value) {
         this.attrs = attrs;
         this.value = value;
     }

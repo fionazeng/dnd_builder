@@ -5,7 +5,7 @@
     <data>
         <variable
             name="attrs"
-            type="android.powerword.siegfried.com.dnd_builder.model.HeroAttr" />
+            type="android.powerword.siegfried.com.dnd_builder.model.HeroAttrItem" />
     </data>
     <android.support.v7.widget.CardView
 

@@ -3,18 +3,14 @@ package android.powerword.siegfried.com.dnd_builder.adapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.powerword.siegfried.com.dnd_builder.R;
-import android.powerword.siegfried.com.dnd_builder.model.HeroAttr;
-import android.support.annotation.ArrayRes;
+import android.powerword.siegfried.com.dnd_builder.model.HeroAttrItem;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.android.databinding.library.baseAdapters.BR;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +18,7 @@ import java.util.Collections;
 public class AttrAdapter extends RecyclerView.Adapter<AttrAdapter.AttrHolder> implements ItemTouchHelperAdapter {
 
 
-    private ArrayList<HeroAttr> arraylist;
+    private ArrayList<HeroAttrItem> arraylist;
 
     @NonNull
     @Override
@@ -32,7 +28,7 @@ public class AttrAdapter extends RecyclerView.Adapter<AttrAdapter.AttrHolder> im
         return new AttrHolder(view) ;
     }
 
-    public HeroAttr getDataByPosition(int position) {
+    public HeroAttrItem getDataByPosition(int position) {
         return this.arraylist == null ?null: this.arraylist.get(position);
     }
 
@@ -40,10 +36,7 @@ public class AttrAdapter extends RecyclerView.Adapter<AttrAdapter.AttrHolder> im
     @Override
     public void onBindViewHolder(@NonNull AttrHolder holder, int position) {
         ViewDataBinding bind = DataBindingUtil.bind(holder.itemView);
-
-//        holder.itemView.addon
         bind.setVariable(BR.attrs, getDataByPosition(position));
-//        holder.fillData(getDataByPosition(position));
     }
 
     @Override
@@ -51,7 +44,7 @@ public class AttrAdapter extends RecyclerView.Adapter<AttrAdapter.AttrHolder> im
         return this.arraylist == null ? 0 : this.arraylist.size();
     }
 
-    public void initData(ArrayList<HeroAttr> arrayList) {
+    public void initData(ArrayList<HeroAttrItem> arrayList) {
         this.arraylist= arrayList;
         notifyDataSetChanged();
     }
@@ -60,16 +53,13 @@ public class AttrAdapter extends RecyclerView.Adapter<AttrAdapter.AttrHolder> im
 
 
     public void reloadedNotify(int fromPosition, int toPosition) {
-        HeroAttr fromValue = this.getDataByPosition(fromPosition);
-        HeroAttr toValue = this.getDataByPosition(toPosition);
-        HeroAttr copyValue1 = new HeroAttr(fromValue.attrs, toValue.value);
-        HeroAttr copyValue2 = new HeroAttr(toValue.attrs, fromValue.value);
+        HeroAttrItem fromValue = this.getDataByPosition(fromPosition);
+        HeroAttrItem toValue = this.getDataByPosition(toPosition);
+        HeroAttrItem copyValue1 = new HeroAttrItem(fromValue.attrs, toValue.value);
+        HeroAttrItem copyValue2 = new HeroAttrItem(toValue.attrs, fromValue.value);
         arraylist.set(fromPosition, copyValue2);
         arraylist.set(toPosition, copyValue1);
         notifyItemMoved(fromPosition, toPosition);
-//        ArrayList arrayList = new ArrayList();
-//        arrayList.addAll(this.arraylist);
-//        this.initData(arrayList);
     }
 
     private void reloadData() {
