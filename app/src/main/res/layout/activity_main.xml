@@ -15,6 +15,9 @@
         <variable
             name="hero"
             type="android.powerword.siegfried.com.dnd_builder.model.Hero"/>
+        <variable
+            name="onClickListener"
+            type="android.powerword.siegfried.com.dnd_builder.annotation.Spell"/>
      </data>
     <android.support.constraint.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -150,7 +153,7 @@
             android:drawableTint="@color/colorWhite"
             android:drawableLeft="@drawable/baseline_apps_24"
             android:textColor="@color/colorWhite"
-            android:onClick="@{v -> vm.onClick()}"
+            android:onClick="@{v -> onClickListener.cast()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

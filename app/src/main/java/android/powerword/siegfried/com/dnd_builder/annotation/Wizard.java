@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class ComputedUtils {
+public class Wizard {
 
     public static void injected(LifecycleOwner owner,Object container, ViewDataBinding binding) {
 //        Field[] declaredFields = container.getClass().getDeclaredFields();
@@ -40,19 +40,30 @@ public class ComputedUtils {
                             injectData(binding, viewmodel, vmField);
                         }
                     }
+                    injectMethod(viewmodel, binding);
                 }
             }
+
         }catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private static void injectMethod(ViewModel viewmodel) throws IllegalAccessException, InstantiationException {
+    private static void injectMethod(ViewModel viewmodel, ViewDataBinding binding) {
         Method[] declaredMethods = viewmodel.getClass().getDeclaredMethods();
         for(Method method : declaredMethods) {
-            int value = method.getAnnotation(android.powerword.siegfried.com.dnd_builder.annotation.Method.class).value();
-            Class proxy = method.getAnnotation(android.powerword.siegfried.com.dnd_builder.annotation.Method.class).proxy();
-            Object o = proxy.newInstance();
+            if(method.isAnnotationPresent(android.powerword.siegfried.com.dnd_builder.annotation.Method.class)) {
+                int brValue = method.getAnnotation(android.powerword.siegfried.com.dnd_builder.annotation.Method.class).value();
+                try {
+                    Spell spell = new Spell(viewmodel, method);
+                    binding.setVariable(brValue, spell);
+                }catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+
+
 
         }
     }

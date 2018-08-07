@@ -30,6 +30,7 @@ public class HeroVM extends AndroidViewModel {
 
     protected Presenter presenter;
 
+    @Method(BR.onClickListener)
     public void onClick(){
         HeroAttrs heroAttrs = presenter.getHeroAttrs();
         this.heroAttrs.setValue(heroAttrs);
